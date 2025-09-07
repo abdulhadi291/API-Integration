@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -235,6 +236,18 @@ const users = [
   },
 ];
 
+// Connect to your MongoDB database
+mongoose.connect('mongodb+srv://abdulhadikamal:casioa159w@cluster0.xmg6wfh.mongodb.net/')
+  .then(() => console.log('Connected to MongoDB!'))
+  .catch(err => console.error('Could not connect to MongoDB...', err));
+
+
+app.post("/users", async (req,res) =>{
+  const user = await User.create(req.body);
+  req.json(user);
+});
+
+
 app.get("/users", (req, res) => {
   res.json(users);
 });
@@ -253,5 +266,5 @@ app.post("/users",(req,res)=>{
 
 
 app.listen(3000, () => {
-  console.log(`Server is Running on port ${999}`);
+  console.log(`Server is Running on port ${3000}`);
 });
