@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const User = require("./users")
 const app = express();
+app.use(express.json());
 
 const users = [
   {
@@ -244,7 +245,7 @@ mongoose.connect('mongodb+srv://abdulhadikamal:casioa159w@cluster0.xmg6wfh.mongo
 
 app.post("/users", async (req,res) =>{
   const user = await User.create(req.body);
-  req.json(user);
+  res.json(user);
 });
 
 
